@@ -16,3 +16,7 @@
     align-items: center;
     font-size: 2rem;
 }
+dialog::backdrop{
+    background: rgb(236, 232, 232);
+    opacity:0.9;
+}
