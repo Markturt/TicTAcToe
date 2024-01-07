@@ -20,3 +20,7 @@ dialog::backdrop{
     background: rgb(236, 232, 232);
     opacity:0.9;
 }
+#output{
+    font-size: 1.2em;
+    font-variant: normal;
+}
