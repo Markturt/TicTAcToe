@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIC TAC TOE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container">
+        <h1>TIC TAC TOE</h1>
+    <p>
+        This is a game of TIC TAC TOE.You will be playing against a <strong>Opponent</strong>.
+    </p>
+    <div>
+        <button type="button" id="openDialog">Enter Details</button>
+    </div>
+    <dialog>
+        <form>
+            <div>
+                <label for="Name">Name:</label>
+                <input type="text" id="Name" placeholder="@example Mark"/>
+            </div>
+            <div>
+                <label for="mark">Marker:</label>
+                <input type="text" id="mark" placeholder="@example 'X'" maxlength="1">
+            </div>
+            <button type="button">Submit</button>
+        </form>
+    </dialog>
+    <div id="gameBoard">
+        <button id="0"></button>
+        <button id="1"></button>
+        <button id="2"></button>
+        <button id="3"></button>
+        <button id="4"></button>
+        <button id="5"></button>
+        <button id="6"></button>
+        <button id="7"></button>
+        <button id="8"></button>
+    </div>
+
+    <button type="button" id="restart">Restart</button>
+    </div>
+</body>
+</html>
