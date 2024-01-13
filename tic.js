@@ -31,7 +31,7 @@ function Player(name,marker){
 let gameBoard=(function(){
     let board=["","","","","","","","",""];
 
-    let emptyArrayIndex=function(){
+    let emptyArrayIndex=function(board){
         let emptyCell=[];
         for(let i=0;i<board.length;i++){
             if(board[i]==""){
@@ -48,45 +48,46 @@ let gameBoard=(function(){
 
 let Game=(function (){
     let handleClick=function(){
-        for(let button of buttons){
-            button.addEventListener("click",(e)=>{
-                if(button.textContent!==""){
-                    return;
-                }
-                if(Game.checkStatus().getWInner!==undefined){
-                    output.textContent=Game.checkStatus().getWInner +"Wins";
-                    return;
-                }
-                else if(Game.checkStatus().isATie!==undefined){
-                    output.textContent="It's A Tie";
-                    return;
-                }
-                else{
+        for(let i=0;i<gameBoard.getGameBoard().length;i++){
+            if(gameBoard.getGameBoard()[i]==""){
+                buttons[i].addEventListener("click",(e)=>{
+                    if(buttons[i].textContent!==""){
+                        return;
+                    };
                     let buttonId=+e.target.id;
-                    button.textContent=player[0].marker;
-                    gameBoard.getGameBoard()[buttonId]=player[0].marker;
-                    chooseCell();
+                    if(Game.checkStatus().getWInner ==undefined){
+                        buttons[i].textContent=player[0].marker;
+                        gameBoard.getGameBoard()[buttonId]=player[0].marker;
+                    }   
                     if(Game.checkStatus().getWInner!==undefined){
                         output.textContent=Game.checkStatus().getWInner +"Wins";
                         return;
                     }
-                }
-            })
-        }
+                    else if(Game.checkStatus().isATie!==undefined){
+                        output.textContent="It's A Tie";
+                        return;
+                    }
+                    else{
+                        chooseCell();
+                    }
+                })
+            }
+        }            
     }
     let chooseCell=function(){
-        console.log(checkStatus());
-        let availableArray=gameBoard.emptyArrayIndex();
-        let randomIndex=Math.floor(Math.random()*availableArray.length);  //this helps shuff;es the empty array
+        let availableArray=gameBoard.emptyArrayIndex(gameBoard.getGameBoard());
+        let randomIndex=Math.floor(Math.random()*availableArray.length);  //this helps shuffles the empty array
         let index=availableArray[randomIndex]
         gameBoard.getGameBoard()[index]=player[1].marker;
-        console.log(gameBoard.getGameBoard());
         for(let button of buttons){
             if(button.id==index){
                 button.textContent=player[1].marker;
             }
         }
-
+        if(Game.checkStatus().getWInner!==undefined){
+            output.textContent=Game.checkStatus().getWInner +"Wins";
+            return;
+        }
     }
     let checkStatus=function(){
         let currentPlayer;
@@ -116,8 +117,8 @@ let Game=(function (){
 
         let isATie=(function(){
             for(let [a,b,c] of winningCombinations){
-                
-                if((gameBoard.getGameBoard()[a]!==gameBoard.getGameBoard()[b] || gameBoard.getGameBoard()[a]!==gameBoard.getGameBoard()[c]) && gameBoard.emptyArrayIndex().length==0){
+               
+                if((gameBoard.getGameBoard()[a]!==gameBoard.getGameBoard()[b] || gameBoard.getGameBoard()[a]!==gameBoard.getGameBoard()[c]) && gameBoard.emptyArrayIndex(gameBoard.getGameBoard()).length==0){
                     return true;;
                 }
             }
